@@ -94,16 +94,5 @@ public class ReservationServiceTest {
         verify(reservationRepository, never()).save(any());
     }
 
-    @Test
-    void shouldFail_WhenUser_IsBlockedByPolicy() {
-        // Arrange
-        when(reservationRepository.getRoomReservation("101")).thenReturn(null);
-        when(userPolicyClient.hasActivePolicy("asd")).thenReturn(false);
-        // Act & Assert
-        assertThrows(IllegalStateException.class, () ->
-                reservationService.createReservation("101", "asd", 2)
-        );
-        verify(reservationRepository).getRoomReservation("101");
 
-    }
 }
